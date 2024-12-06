@@ -1,6 +1,6 @@
 name: flutter_knob
 description: "A customizable rotary knob that can be used for various controls, such as adjusting volume, brightness, or any other value within a specified range"
-version: 0.03
+version: 0.0.3
 homepage: https://github.com/bensalcie/flutter_knob
 environment:
   sdk: '>=3.4.3 <4.0.0'
