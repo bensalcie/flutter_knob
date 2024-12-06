@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_knob/widgets/flutter_widget_painter.dart';
+import 'package:flutter_oknob/widgets/flutter_widget_painter.dart';
 
 /// A customizable rotary knob widget for Flutter.
 ///
-/// `FlutterKnob` provides an interactive control with various
+/// `FlutterOKnob` provides an interactive control with various
 /// configuration options such as size, range, colors, gradients,
 /// sensitivity, and an optional label.
 ///
@@ -14,7 +14,7 @@ import 'package:flutter_knob/widgets/flutter_widget_painter.dart';
 /// - Emits changes via the `onChanged` callback.
 /// - Optional label widget.
 /// - Smooth sensitivity control for better user interaction.
-class FlutterKnob extends StatefulWidget {
+class FlutterOKnob extends StatefulWidget {
   /// The current value of the knob. Must be between [minValue] and [maxValue].
   final double value;
 
@@ -50,8 +50,8 @@ class FlutterKnob extends StatefulWidget {
   /// An optional label widget to display beneath the knob.
   final Widget? knobLabel;
 
-  /// Creates a [FlutterKnob] widget.
-  const FlutterKnob({
+  /// Creates a [FlutterOKnob] widget.
+  const FlutterOKnob({
     super.key,
     required this.value,
     required this.onChanged,
@@ -66,10 +66,10 @@ class FlutterKnob extends StatefulWidget {
   });
 
   @override
-  State<FlutterKnob> createState() => _FlutterKnobState();
+  State<FlutterOKnob> createState() => _FlutterOKnobState();
 }
 
-class _FlutterKnobState extends State<FlutterKnob> {
+class _FlutterOKnobState extends State<FlutterOKnob> {
   /// A notifier for the current knob value. Updates are listened to
   /// and used to redraw the knob UI.
   late ValueNotifier<double> _valueNotifier;

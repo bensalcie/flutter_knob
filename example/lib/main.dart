@@ -1,6 +1,6 @@
 import 'package:example/widgets/app_textview_medium.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_knob/flutter_knob.dart';
+import 'package:flutter_knob/flutter_oldschool_knob.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   text: 'Knob Example Configuration',
                   textAlign: TextAlign.start),
 
-              FlutterKnob(
+              FlutterOKnob(
                 size: 200,
                 value: 0,
                 maxValue: 360,
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: FlutterKnob(
+                    child: FlutterOKnob(
                       value: 40,
                       minValue: 0,
                       maxValue: 100,
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: FlutterKnob(
+                    child: FlutterOKnob(
                       value: 72,
                       minValue: 60,
                       maxValue: 90,
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                       flex: 1,
-                      child: FlutterKnob(
+                      child: FlutterOKnob(
                         value: 30,
                         minValue: 0,
                         maxValue: 100,
@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       )),
                   Expanded(
                       flex: 1,
-                      child: FlutterKnob(
+                      child: FlutterOKnob(
                         value: 75,
                         minValue: 0,
                         maxValue: 100,
@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: FlutterKnob(
+                    child: FlutterOKnob(
                       value: 35,
                       minValue: 0,
                       maxValue: 100,
@@ -196,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: FlutterKnob(
+                    child: FlutterOKnob(
                       value: 50,
                       minValue: 0,
                       maxValue: 100,
@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: FlutterKnob(
+                    child: FlutterOKnob(
                       value: 55,
                       minValue: 0,
                       maxValue: 120,
@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                       flex: 1,
-                      child: FlutterKnob(
+                      child: FlutterOKnob(
                         value: 50,
                         minValue: 0,
                         maxValue: 100,

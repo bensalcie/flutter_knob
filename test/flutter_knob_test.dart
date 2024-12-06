@@ -1,15 +1,15 @@
-import 'package:flutter_knob/flutter_knob.dart';
+import 'package:flutter_oknob/flutter_oldschool_knob.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter/material.dart';
 
 void main() {
-  testWidgets('FlutterKnob widget renders correctly',
+  testWidgets('FlutterOKnob widget renders correctly',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: FlutterKnob(
+          body: FlutterOKnob(
             value: 50,
             onChanged: (_) {},
             knobLabel: const Text('Volume: 50%'),
@@ -23,14 +23,14 @@ void main() {
     expect(find.byType(CustomPaint), findsNWidgets(2));
   });
 
-  testWidgets('FlutterKnob updates value on pan gesture',
+  testWidgets('FlutterOKnob updates value on pan gesture',
       (WidgetTester tester) async {
     double updatedValue = 0;
 
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: FlutterKnob(
+          body: FlutterOKnob(
             value: 50,
             onChanged: (value) => updatedValue = value,
             knobLabel: const Text('Brightness'),
@@ -45,14 +45,14 @@ void main() {
     expect(updatedValue, greaterThan(50));
   });
 
-  testWidgets('FlutterKnob clamps values between min and max',
+  testWidgets('FlutterOKnob clamps values between min and max',
       (WidgetTester tester) async {
     double updatedValue = 0;
 
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: FlutterKnob(
+          body: FlutterOKnob(
             value: 90,
             onChanged: (value) => updatedValue = value,
             knobLabel: const Text('Zoom'),
