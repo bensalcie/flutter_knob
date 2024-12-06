@@ -1,4 +1,4 @@
-# FlutterKnob Widget Documentation
+# FlutterOKnob Widget Documentation
 
 ## Overview:
   Description: |
@@ -25,20 +25,23 @@
     - Add the FlutterKnob widget to your Flutter project dependencies in your `pubspec.yaml` file.
     - Import the widget into your Dart file using the following import statement:
 
-    
      
-      import 'package:flutter_knob/flutter_knob.dart';
+      import 'import 'package:flutter_knob/flutter_oldschool_knob.dart';
+
+
+      dependencies:
+        flutter_oknob: ^0.0.3
      
 
 ## Usage Example:
   Description: |
-    Here is an example of how to use the `FlutterKnob` widget in your Flutter application. 
+    Here is an example of how to use the `FlutterOKnob` widget in your Flutter application. 
     The widget supports customizable properties such as size, gradients, marker color, sensitivity, and a custom label.
 
   Example: 
   
     
-        FlutterKnob(
+        FlutterOKnob(
           value: 50.0,
           onChanged: (newValue) {
             print('Knob value changed: $newValue');
@@ -62,7 +65,7 @@
 
 ## Parameters:
   Description: |
-    The following table outlines the customizable parameters that control the behavior and appearance of the `FlutterKnob` widget. Each parameter has a default value, but all can be modified to fit the needs of your specific implementation.
+    The following table outlines the customizable parameters that control the behavior and appearance of the `FlutterOKnob` widget. Each parameter has a default value, but all can be modified to fit the needs of your specific implementation.
 
   parameters:
      
@@ -120,14 +123,14 @@
           An optional widget that can be placed beneath the knob. Typically used to display a label, such as "Volume" or "Brightness."
 
 ## How It Works:
-  description: |
-    The `FlutterKnob` widget works by listening to drag gestures (`onPanUpdate`). When a user drags the knob, the value of the knob changes based on the drag movement. The updated value is clamped between `minValue` and `maxValue`, ensuring it stays within the allowed range. The value change is reflected visually by updating the `ValueNotifier` which triggers the widget to rebuild and display the new value.
+  Description: |
+    The `FlutterOKnob` widget works by listening to drag gestures (`onPanUpdate`). When a user drags the knob, the value of the knob changes based on the drag movement. The updated value is clamped between `minValue` and `maxValue`, ensuring it stays within the allowed range. The value change is reflected visually by updating the `ValueNotifier` which triggers the widget to rebuild and display the new value.
 
     The widget also uses custom painting (`FlutterKnobPainter`) to render the knob's outer ring, inner knob, and value marker. This allows the widget to provide a smooth, customizable appearance while maintaining high performance.
 
 ## Customization Options:
   description: |
-    The `FlutterKnob` widget provides several options to customize its appearance and behavior. These options allow you to tailor the widget to fit your app’s design and functional needs.
+    The `FlutterOKnob` widget provides several options to customize its appearance and behavior. These options allow you to tailor the widget to fit your app’s design and functional needs.
 
   options:
     outerRingGradient:

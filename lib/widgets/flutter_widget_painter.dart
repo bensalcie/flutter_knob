@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-
 class FlutterKnobPainter extends CustomPainter {
   final double value;
   final double minValue;
