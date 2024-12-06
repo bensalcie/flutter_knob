@@ -18,96 +18,100 @@
   steps:
     - Add the FlutterKnob widget to your Flutter project dependencies in your `pubspec.yaml` file.
     - Import the widget into your Dart file using the following import statement:
-      ```dart
+
+    
+     
       import 'package:flutter_knob/flutter_knob.dart';
-      ```
+     
 
 ## Usage Example:
-  description: |
+  Description: |
     Here is an example of how to use the `FlutterKnob` widget in your Flutter application. 
     The widget supports customizable properties such as size, gradients, marker color, sensitivity, and a custom label.
 
-  example: |
-    ```dart
-    FlutterKnob(
-      value: 50.0,
-      onChanged: (newValue) {
-        print('Knob value changed: $newValue');
-      },
-      size: 200.0,
-      minValue: 0.0,
-      maxValue: 100.0,
-      outerRingGradient: LinearGradient(
-        colors: [Colors.blue, Colors.purple],
-      ),
-      innerKnobGradient: LinearGradient(
-        colors: [Colors.orange, Colors.red],
-      ),
-      markerColor: Colors.green,
-      knobLabel: Text(
-        'Volume',
-        style: TextStyle(color: Colors.white, fontSize: 18.0),
-      ),
-    );
-    ```
+  Example: 
+  
+    
+        FlutterKnob(
+          value: 50.0,
+          onChanged: (newValue) {
+            print('Knob value changed: $newValue');
+          },
+          size: 200.0,
+          minValue: 0.0,
+          maxValue: 100.0,
+          outerRingGradient: LinearGradient(
+            colors: [Colors.blue, Colors.purple],
+          ),
+          innerKnobGradient: LinearGradient(
+            colors: [Colors.orange, Colors.red],
+          ),
+          markerColor: Colors.green,
+          knobLabel: Text(
+            'Volume',
+            style: TextStyle(color: Colors.white, fontSize: 18.0),
+          ),
+        );
+   
 
 ## Parameters:
-  description: |
+  Description: |
     The following table outlines the customizable parameters that control the behavior and appearance of the `FlutterKnob` widget. Each parameter has a default value, but all can be modified to fit the needs of your specific implementation.
 
   parameters:
-    value:
-      type: double
-      description: |
-        The current value of the knob, which should be between the `minValue` and `maxValue`. It is required for the widget to work properly.
-      required: true
-    onChanged:
-      type: ValueChanged<double>
-      description: |
-        A callback function that is triggered when the knob's value changes. It passes the new value as an argument.
-      required: true
-    size:
-      type: double
-      default: 150.0
-      description: |
-        The diameter of the knob (in pixels). This determines the size of the knob on the screen.
-    minValue:
-      type: double
-      default: 0.0
-      description: |
-        The minimum possible value that the knob can be set to.
-    maxValue:
-      type: double
-      default: 100.0
-      description: |
-        The maximum possible value that the knob can be set to.
-    markerColor:
-      type: Color
-      default: Colors.greenAccent
-      description: |
-        The color of the marker that indicates the current value on the knob.
-    outerRingGradient:
-      type: Gradient
-      default: |
-        LinearGradient(colors: [Colors.black, Colors.grey], begin: Alignment.topLeft, end: Alignment.bottomRight)
-      description: |
-        The gradient applied to the outer ring of the knob.
-    innerKnobGradient:
-      type: Gradient
-      default: |
-        LinearGradient(colors: [Colors.grey, Colors.black], begin: Alignment.topLeft, end: Alignment.bottomRight)
-      description: |
-        The gradient applied to the inner knob.
-    sensitivity:
-      type: double
-      default: 0.5
-      description: |
-        Controls how sensitive the knob is to user input during drag gestures. Higher values make the knob more sensitive.
-    knobLabel:
-      type: Widget
-      default: null
-      description: |
-        An optional widget that can be placed beneath the knob. Typically used to display a label, such as "Volume" or "Brightness."
+     
+     value:
+        type: double
+        description: |
+          The current value of the knob, which should be between the `minValue` and `maxValue`. It is required for the widget to work properly.
+        required: true
+      onChanged:
+        type: ValueChanged<double>
+        description: |
+          A callback function that is triggered when the knob's value changes. It passes the new value as an argument.
+        required: true
+      size:
+        type: double
+        default: 150.0
+        description: |
+          The diameter of the knob (in pixels). This determines the size of the knob on the screen.
+      minValue:
+        type: double
+        default: 0.0
+        description: |
+          The minimum possible value that the knob can be set to.
+      maxValue:
+        type: double
+        default: 100.0
+        description: |
+          The maximum possible value that the knob can be set to.
+      markerColor:
+        type: Color
+        default: Colors.greenAccent
+        description: |
+          The color of the marker that indicates the current value on the knob.
+      outerRingGradient:
+        type: Gradient
+        default: |
+          LinearGradient(colors: [Colors.black, Colors.grey], begin: Alignment.topLeft, end: Alignment.bottomRight)
+        description: |
+          The gradient applied to the outer ring of the knob.
+      innerKnobGradient:
+        type: Gradient
+        default: |
+          LinearGradient(colors: [Colors.grey, Colors.black], begin: Alignment.topLeft, end: Alignment.bottomRight)
+        description: |
+          The gradient applied to the inner knob.
+      sensitivity:
+        type: double
+        default: 0.5
+        description: |
+          Controls how sensitive the knob is to user input during drag gestures. Higher values make the knob more sensitive.
+      knobLabel:
+        type: Widget
+        default: null
+        description: |
+          An optional widget that can be placed beneath the knob. Typically used to display a label, such as "Volume" or "Brightness."
 
 ## How It Works:
   description: |
