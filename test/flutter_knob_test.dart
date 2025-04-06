@@ -10,7 +10,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: FlutterOKnob(
-            value: 50,
+            knobvalue: 50,
             onChanged: (_) {},
             knobLabel: const Text('Volume: 50%'),
           ),
@@ -31,7 +31,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: FlutterOKnob(
-            value: 50,
+            knobvalue: 50,
             onChanged: (value) => updatedValue = value,
             knobLabel: const Text('Brightness'),
           ),
@@ -53,7 +53,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: FlutterOKnob(
-            value: 90,
+            knobvalue: 90,
             onChanged: (value) => updatedValue = value,
             knobLabel: const Text('Zoom'),
             minValue: 20,

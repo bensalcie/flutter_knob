@@ -1,68 +1,206 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_oknob/widgets/flutter_widget_painter.dart';
 
-/// A customizable rotary knob widget for Flutter.
-///
-/// `FlutterOKnob` provides an interactive control with various
-/// configuration options such as size, range, colors, gradients,
-/// sensitivity, and an optional label.
-///
-/// ### Features:
-/// - Customizable size, value range, and appearance.
-/// - Emits changes via the `onChanged` callback.
-/// - Optional label widget.
-/// - Smooth sensitivity control for better user interaction.
+// class FlutterOKnob extends StatefulWidget {
+//   final double value;
+//   final ValueChanged<double> onChanged;
+//   final double size;
+//   final double? minValue;
+//   final double? maxValue;
+//   final Color? markerColor;
+//   final Gradient? outerRingGradient;
+//   final Gradient? innerKnobGradient;
+//   final double sensitivity;
+//   final Widget? knobLabel;
+//   final double rotation;
+//   final bool showAngleLabels;
+//   final double angleOffset;
+
+//   const FlutterOKnob({
+//     super.key,
+//     required this.value,
+//     required this.onChanged,
+//     this.size = 150.0,
+//     this.minValue,
+//     this.maxValue,
+//     this.markerColor,
+//     this.outerRingGradient,
+//     this.innerKnobGradient,
+//     this.sensitivity = 0.5,
+//     this.knobLabel,
+//     this.rotation = 360,
+//     this.showAngleLabels = true,
+//     this.angleOffset = 270, // Default angle starts from bottom
+//   });
+
+//   @override
+//   State<FlutterOKnob> createState() => _FlutterOKnobState();
+// }
+
+// class _FlutterOKnobState extends State<FlutterOKnob> {
+//   late ValueNotifier<double> _valueNotifier;
+//   static const _defaultOuterRingGradient = LinearGradient(
+//     colors: [Colors.black, Colors.grey],
+//     begin: Alignment.topLeft,
+//     end: Alignment.bottomRight,
+//   );
+//   static const _defaultInnerKnobGradient = LinearGradient(
+//     colors: [Colors.grey, Colors.black],
+//     begin: Alignment.topLeft,
+//     end: Alignment.bottomRight,
+//   );
+//   static const _defaultMarkerColor = Colors.greenAccent;
+//   static const _defaultLabelColor = Colors.white;
+
+//   late final double startAngle;
+//   late final double endAngle;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _valueNotifier = ValueNotifier<double>(widget.value);
+//     startAngle = (widget.angleOffset % 360) * pi / 180;
+//     endAngle = startAngle + 2 * pi;
+//   }
+
+//   @override
+//   void dispose() {
+//     _valueNotifier.dispose();
+//     super.dispose();
+//   }
+
+//   double _angleFromValue(double value) {
+//     final min = widget.minValue ?? 0;
+//     final max = widget.maxValue ?? widget.rotation;
+//     return startAngle + ((value - min) / (max - min)) * (endAngle - startAngle);
+//   }
+
+//   double _valueFromAngle(double angle) {
+//     final min = widget.minValue ?? 0;
+//     final max = widget.maxValue ?? widget.rotation;
+//     final normalized = (angle - startAngle) % (2 * pi);
+//     final value = min + (normalized / (endAngle - startAngle)) * (max - min);
+//     return value.clamp(min, max);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final min = widget.minValue ?? 0;
+//     final max = widget.maxValue ?? widget.rotation;
+
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         Listener(
+//           onPointerSignal: (_) {},
+//           child: GestureDetector(
+//             behavior: HitTestBehavior.translucent,
+//             onPanUpdate: (details) {
+//               RenderBox renderBox = context.findRenderObject() as RenderBox;
+//               final offset = renderBox.globalToLocal(details.globalPosition);
+//               final center = Offset(widget.size / 2, widget.size / 2);
+//               final angle = atan2(offset.dy - center.dy, offset.dx - center.dx);
+//               final newValue = _valueFromAngle(angle);
+//               _valueNotifier.value = newValue;
+//               widget.onChanged(newValue);
+//             },
+//             child: ValueListenableBuilder<double>(
+//               valueListenable: _valueNotifier,
+//               builder: (context, value, _) {
+//                 final angle = _angleFromValue(value);
+
+//                 return SizedBox(
+//                   width: widget.size,
+//                   height: widget.size,
+//                   child: Stack(
+//                     alignment: Alignment.center,
+//                     children: [
+//                       CustomPaint(
+//                         size: Size(widget.size, widget.size),
+//                         painter: FlutterKnobPainter(
+//                           value: value,
+//                           minValue: min,
+//                           maxValue: max,
+//                           markerColor: widget.markerColor ?? _defaultMarkerColor,
+//                           outerRingGradient: widget.outerRingGradient ?? _defaultOuterRingGradient,
+//                           innerKnobGradient: widget.innerKnobGradient ?? _defaultInnerKnobGradient,
+//                           startAngle: startAngle,
+//                           endAngle: endAngle,
+//                           showLabels: widget.showAngleLabels,
+//                           rotation: widget.rotation,
+//                         ),
+//                       ),
+//                       Positioned(
+//                         left: widget.size / 2 + cos(angle) * widget.size / 3.5 - 10,
+//                         top: widget.size / 2 + sin(angle) * widget.size / 3.5 - 10,
+//                         child: Column(
+//                           children: [
+//                             Container(
+//                               width: 6,
+//                               height: 6,
+//                               decoration: BoxDecoration(
+//                                 color: widget.markerColor ?? _defaultMarkerColor,
+//                                 shape: BoxShape.circle,
+//                               ),
+//                             ),
+//                             const SizedBox(height: 2),
+//                             Text(
+//                               value.toStringAsFixed(0),
+//                               style: const TextStyle(
+//                                 fontSize: 10,
+//                                 color: _defaultLabelColor,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       )
+//                     ],
+//                   ),
+//                 );
+//               },
+//             ),
+//           ),
+//         ),
+//         if (widget.knobLabel != null)
+//           Padding(
+//             padding: const EdgeInsets.only(top: 10),
+//             child: widget.knobLabel!,
+//           ),
+//       ],
+//     );
+//   }
+// }
 class FlutterOKnob extends StatefulWidget {
-  /// The current value of the knob. Must be between [minValue] and [maxValue].
-  final double value;
-
-  /// A callback triggered whenever the knob value changes.
-  /// Receives the updated value as a parameter.
+  final double knobvalue;
   final ValueChanged<double> onChanged;
-
-  /// The size (diameter) of the knob. Default is `150.0`.
   final double size;
-
-  /// The minimum allowable value for the knob. Default is `0`.
-  final double minValue;
-
-  /// The maximum allowable value for the knob. Default is `100`.
-  final double maxValue;
-
-  /// The color of the marker that indicates the current position.
-  /// If not provided, defaults to `Colors.greenAccent`.
+  final double? minValue;
+  final double? maxValue;
   final Color? markerColor;
-
-  /// The gradient for the outer ring of the knob.
-  /// If not provided, defaults to a gradient from black to grey.
   final Gradient? outerRingGradient;
-
-  /// The gradient for the inner knob.
-  /// If not provided, defaults to a gradient from grey to black.
   final Gradient? innerKnobGradient;
-
-  /// The sensitivity of the knob to drag gestures.
-  /// Higher values make the knob more responsive. Default is `0.5`.
   final double sensitivity;
-
-  /// An optional label widget to display beneath the knob.
   final Widget? knobLabel;
+  final double maxRotationAngle;
+  final bool showKnobLabels;
+  final double angleOffset;
 
-  /// Creates a [FlutterOKnob] widget.
   const FlutterOKnob({
     super.key,
-    required this.value,
+    required this.knobvalue,
     required this.onChanged,
     this.size = 150.0,
-    this.minValue = 0,
-    this.maxValue = 100,
+    this.minValue,
+    this.maxValue,
     this.markerColor,
     this.outerRingGradient,
     this.innerKnobGradient,
     this.sensitivity = 0.5,
     this.knobLabel,
+    this.maxRotationAngle = 360,
+    this.showKnobLabels = true,
+    this.angleOffset = 90,
   });
 
   @override
@@ -70,34 +208,29 @@ class FlutterOKnob extends StatefulWidget {
 }
 
 class _FlutterOKnobState extends State<FlutterOKnob> {
-  /// A notifier for the current knob value. Updates are listened to
-  /// and used to redraw the knob UI.
   late ValueNotifier<double> _valueNotifier;
-
-  /// Default gradient for the outer ring.
   static const _defaultOuterRingGradient = LinearGradient(
     colors: [Colors.black, Colors.grey],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
-
-  /// Default gradient for the inner knob.
   static const _defaultInnerKnobGradient = LinearGradient(
     colors: [Colors.grey, Colors.black],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
-
-  /// Default color for the marker.
   static const _defaultMarkerColor = Colors.greenAccent;
-
-  /// Default color for the label text.
   static const _defaultLabelColor = Colors.white;
+
+  late final double startAngle;
+  late final double endAngle;
 
   @override
   void initState() {
     super.initState();
-    _valueNotifier = ValueNotifier<double>(widget.value);
+    _valueNotifier = ValueNotifier<double>(widget.knobvalue);
+    startAngle = (widget.angleOffset % 360) * pi / 180;
+    endAngle = startAngle + 2 * pi;
   }
 
   @override
@@ -106,72 +239,107 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
     super.dispose();
   }
 
+  double _angleFromValue(double value) {
+    final min = widget.minValue ?? 0;
+    final max = widget.maxValue ?? widget.maxRotationAngle;
+    return startAngle + ((value - min) / (max - min)) * (endAngle - startAngle);
+  }
+
+  double _valueFromAngle(double angle) {
+    final min = widget.minValue ?? 0;
+    final max = widget.maxValue ?? widget.maxRotationAngle;
+    final normalized = (angle - startAngle) % (2 * pi);
+    final value = min + (normalized / (endAngle - startAngle)) * (max - min);
+    return value.clamp(min, max);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final min = widget.minValue ?? 0;
+    final max = widget.maxValue ?? widget.maxRotationAngle;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            GestureDetector(
-              onPanUpdate: (details) {
-                final delta = details.delta.dx * widget.sensitivity;
-                final newValue = (_valueNotifier.value + delta)
-                    .clamp(widget.minValue, widget.maxValue);
-                _valueNotifier.value = newValue;
-                widget.onChanged(newValue);
-              },
-              child: ValueListenableBuilder<double>(
-                valueListenable: _valueNotifier,
-                builder: (context, value, _) {
-                  return SizedBox(
-                    width: widget.size,
-                    height: widget.size,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        /// Outer ring with configurable gradients
-                        CustomPaint(
-                          size: Size(widget.size, widget.size),
-                          painter: FlutterKnobPainter(
-                            value: value,
-                            minValue: widget.minValue,
-                            maxValue: widget.maxValue,
-                            markerColor:
-                                widget.markerColor ?? _defaultMarkerColor,
-                            outerRingGradient: widget.outerRingGradient ??
-                                _defaultOuterRingGradient,
-                            innerKnobGradient: widget.innerKnobGradient ??
-                                _defaultInnerKnobGradient,
-                          ),
-                        ),
+        Listener(
+          onPointerSignal: (_) {},
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onPanUpdate: (details) {
+              RenderBox renderBox = context.findRenderObject() as RenderBox;
+              final offset = renderBox.globalToLocal(details.globalPosition);
+              final center = Offset(widget.size / 2, widget.size / 2);
+              final angle = atan2(offset.dy - center.dy, offset.dx - center.dx);
+              final newValue = _valueFromAngle(angle);
+              _valueNotifier.value = newValue;
+              widget.onChanged(newValue);
+            },
+            child: ValueListenableBuilder<double>(
+              valueListenable: _valueNotifier,
+              builder: (context, value, _) {
+                final angle = _angleFromValue(value);
 
-                        /// Current value displayed near the knob's edge
-                        Positioned(
-                          left: widget.size / 2 +
-                              cos(_calculateAngle(value)) * widget.size / 3.5,
-                          top: widget.size / 2 +
-                              sin(_calculateAngle(value)) * widget.size / 3.5,
-                          child: Text(
-                            value.toStringAsFixed(0),
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: _defaultLabelColor,
+                return SizedBox(
+                  width: widget.size,
+                  height: widget.size,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CustomPaint(
+                        size: Size(widget.size, widget.size),
+                        painter: FlutterKnobPainter(
+                          value: value,
+                          minValue: min,
+                          maxValue: max,
+                          markerColor:
+                              widget.markerColor ?? _defaultMarkerColor,
+                          outerRingGradient: widget.outerRingGradient ??
+                              _defaultOuterRingGradient,
+                          innerKnobGradient: widget.innerKnobGradient ??
+                              _defaultInnerKnobGradient,
+                          startAngle: startAngle,
+                          endAngle: endAngle,
+                          showLabels: widget.showKnobLabels,
+                          rotation: widget.maxRotationAngle,
+                          // Ensure labels reflect the min/max properly in painter too
+                        ),
+                      ),
+                      Positioned(
+                        left: widget.size / 2 +
+                            cos(angle) * widget.size / 3.5 -
+                            10,
+                        top: widget.size / 2 +
+                            sin(angle) * widget.size / 3.5 -
+                            10,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color:
+                                    widget.markerColor ?? _defaultMarkerColor,
+                                shape: BoxShape.circle,
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 2),
+                            Text(
+                              value.toStringAsFixed(0),
+                              style: const TextStyle(
+                                fontSize: 10,
+                                color: _defaultLabelColor,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      )
+                    ],
+                  ),
+                );
+              },
             ),
-          ],
+          ),
         ),
-
-        /// Optional label widget
         if (widget.knobLabel != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -179,12 +347,5 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
           ),
       ],
     );
-  }
-
-  /// Converts the current value to a gauge-style angle in radians.
-  double _calculateAngle(double value) {
-    final normalizedValue =
-        (value - widget.minValue) / (widget.maxValue - widget.minValue);
-    return normalizedValue * pi - pi;
   }
 }
