@@ -1,3 +1,27 @@
+## 0.0.5
+
+### Overview:
+FlutterOKnob now includes additional configuration options to give developers even more control over the knob's behavior and visual feedback. These enhancements provide better UX, fine-tuned interaction, and more intuitive number positioning.
+
+### What's New:
+
+1. maxRotationAngle  
+   - Introduced a new parameter that defines the rotational range (in degrees) of the knob.  
+   - This directly impacts how values are distributed between minValue and maxValue, allowing for more accurate mapping and greater customization of the knob's behavior.
+
+2. Improved Sensitivity Handling  
+   - The sensitivity parameter has been enhanced to offer a more realistic and smoother user interaction.  
+   - Dragging the knob now feels more natural and responsive, resulting in better overall UX.
+
+3. angleOffset Parameter Added  
+   - A new angle offset parameter determines the starting angle for the knob's visual numbering and rotation arc.  
+   - Developers can now control where the minimum and maximum values visually appear, offering improved alignment and thematic control for their UI designs.
+
+### Additional Improvements:
+- Optimized the painter to reflect the new rotational range and angle offset dynamically.
+- Minor internal refactoring to improve maintainability and customization consistency.
+
+
 ## 0.0.4
 
 ## Overview:

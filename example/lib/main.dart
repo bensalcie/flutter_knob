@@ -1,6 +1,6 @@
 import 'package:example/widgets/app_textview_medium.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_knob/flutter_oldschool_knob.dart';
+import 'package:flutter_oknob/flutter_oldschool_knob.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,12 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   weight: FontWeight.w900,
                   text: 'Knob Example Configuration',
                   textAlign: TextAlign.start),
-
               FlutterOKnob(
                 size: 200,
-                value: 0,
-                maxValue: 360,
-                sensitivity: 0.2,
+                knobvalue: 125,
+                showKnobLabels: true,
+                maxRotationAngle: 180,
+                sensitivity: 0.6,
                 onChanged: (brighness) {
                   debugPrint(
                       "Flutter Knob Changed Value : ==>  Brightness $brighness");
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     flex: 1,
                     child: FlutterOKnob(
-                      value: 40,
+                      knobvalue: 40,
                       minValue: 0,
                       maxValue: 100,
                       onChanged: (newValue) {
@@ -92,7 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     flex: 1,
                     child: FlutterOKnob(
-                      value: 72,
+                      knobvalue: 72,
+                      angleOffset: 90,
+                      showKnobLabels: false,
                       minValue: 60,
                       maxValue: 90,
                       onChanged: (newValue) {
@@ -121,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                       flex: 1,
                       child: FlutterOKnob(
-                        value: 30,
+                        knobvalue: 30,
                         minValue: 0,
                         maxValue: 100,
                         onChanged: (newValue) {
@@ -144,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                       flex: 1,
                       child: FlutterOKnob(
-                        value: 75,
+                        knobvalue: 75,
                         minValue: 0,
                         maxValue: 100,
                         onChanged: (newValue) {
@@ -173,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     flex: 1,
                     child: FlutterOKnob(
-                      value: 35,
+                      knobvalue: 35,
                       minValue: 0,
                       maxValue: 100,
                       onChanged: (newValue) {
@@ -197,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     flex: 1,
                     child: FlutterOKnob(
-                      value: 50,
+                      knobvalue: 50,
                       minValue: 0,
                       maxValue: 100,
                       knobLabel: const AppTextViewMedium(
@@ -226,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     flex: 1,
                     child: FlutterOKnob(
-                      value: 55,
+                      knobvalue: 55,
                       minValue: 0,
                       maxValue: 120,
                       onChanged: (newValue) {
@@ -250,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                       flex: 1,
                       child: FlutterOKnob(
-                        value: 50,
+                        knobvalue: 50,
                         minValue: 0,
                         maxValue: 100,
                         onChanged: (newValue) {
