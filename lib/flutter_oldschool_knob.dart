@@ -1,21 +1,53 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_oknob/widgets/flutter_widget_painter.dart';
+
+/// A customizable rotary knob widget, similar to analog audio knobs.
+///
+/// `FlutterOKnob` allows users to rotate a knob to select a value within a
+/// given range. It supports styling via gradients, markers, labels, and
+/// rotation sensitivity.
 class FlutterOKnob extends StatefulWidget {
+  /// The current value of the knob.
   final double knobvalue;
+
+  /// Callback invoked when the knob value changes.
   final ValueChanged<double> onChanged;
+
+  /// The overall diameter of the knob widget.
   final double size;
+
+  /// The minimum allowed value for the knob. Defaults to 0.
   final double? minValue;
+
+  /// The maximum allowed value for the knob. Defaults to [maxRotationAngle].
   final double? maxValue;
+
+  /// Color of the value marker on the knob.
   final Color? markerColor;
+
+  /// Gradient used for the outer ring of the knob.
   final Gradient? outerRingGradient;
+
+  /// Gradient used for the inner knob.
   final Gradient? innerKnobGradient;
+
+  /// Sensitivity factor for knob rotation. Not currently used in this version.
   final double sensitivity;
+
+  /// Optional widget to be displayed below the knob as a label.
   final Widget? knobLabel;
+
+  /// The maximum rotation angle (in degrees) allowed for the knob. Defaults to 360°.
   final double maxRotationAngle;
+
+  /// If true, shows numerical value markers on the knob.
   final bool showKnobLabels;
+
+  /// The starting angle offset in degrees. Default is 90° (pointing up).
   final double angleOffset;
 
+  /// Creates a [FlutterOKnob] widget.
   const FlutterOKnob({
     super.key,
     required this.knobvalue,
@@ -39,6 +71,8 @@ class FlutterOKnob extends StatefulWidget {
 
 class _FlutterOKnobState extends State<FlutterOKnob> {
   late ValueNotifier<double> _valueNotifier;
+
+  // Default styling values
   static const _defaultOuterRingGradient = LinearGradient(
     colors: [Colors.black, Colors.grey],
     begin: Alignment.topLeft,
@@ -59,6 +93,8 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
   void initState() {
     super.initState();
     _valueNotifier = ValueNotifier<double>(widget.knobvalue);
+
+    // Convert angle offset to radians for calculation
     startAngle = (widget.angleOffset % 360) * pi / 180;
     endAngle = startAngle + 2 * pi;
   }
@@ -69,12 +105,14 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
     super.dispose();
   }
 
+  /// Converts a given value to an angle in radians based on min and max.
   double _angleFromValue(double value) {
     final min = widget.minValue ?? 0;
     final max = widget.maxValue ?? widget.maxRotationAngle;
     return startAngle + ((value - min) / (max - min)) * (endAngle - startAngle);
   }
 
+  /// Converts a given angle in radians to a value based on min and max.
   double _valueFromAngle(double angle) {
     final min = widget.minValue ?? 0;
     final max = widget.maxValue ?? widget.maxRotationAngle;
@@ -92,10 +130,11 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Listener(
-          onPointerSignal: (_) {},
+          onPointerSignal: (_) {}, // Reserved for future use
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onPanUpdate: (details) {
+              // Detect dragging to update value
               RenderBox renderBox = context.findRenderObject() as RenderBox;
               final offset = renderBox.globalToLocal(details.globalPosition);
               final center = Offset(widget.size / 2, widget.size / 2);
@@ -115,6 +154,7 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
+                      /// Custom painter that draws the knob rings and labels.
                       CustomPaint(
                         size: Size(widget.size, widget.size),
                         painter: FlutterKnobPainter(
@@ -131,9 +171,10 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
                           endAngle: endAngle,
                           showLabels: widget.showKnobLabels,
                           rotation: widget.maxRotationAngle,
-                          // Ensure labels reflect the min/max properly in painter too
                         ),
                       ),
+
+                      /// Marker showing current value position and value
                       Positioned(
                         left: widget.size / 2 +
                             cos(angle) * widget.size / 3.5 -
@@ -170,6 +211,8 @@ class _FlutterOKnobState extends State<FlutterOKnob> {
             ),
           ),
         ),
+
+        /// Optional knob label displayed below the knob
         if (widget.knobLabel != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),

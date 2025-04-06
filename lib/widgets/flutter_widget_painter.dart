@@ -2,18 +2,42 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// A [CustomPainter] responsible for rendering the visual appearance of the knob.
+///
+/// It draws the outer ring, the inner knob, a marker indicating the current value,
+/// and optionally value labels around the knob.
 class FlutterKnobPainter extends CustomPainter {
+  /// Current value to be represented by the knob.
   final double value;
+
+  /// The minimum possible value for the knob.
   final double minValue;
+
+  /// The maximum possible value for the knob.
   final double maxValue;
+
+  /// The color used to paint the value marker.
   final Color markerColor;
+
+  /// The gradient used for the outer ring of the knob.
   final Gradient outerRingGradient;
+
+  /// The gradient used for the inner circle of the knob.
   final Gradient innerKnobGradient;
+
+  /// The starting angle (in radians) for the knob’s rotation.
   final double startAngle;
+
+  /// The ending angle (in radians) for the knob’s rotation.
   final double endAngle;
+
+  /// The maximum rotation value that maps to the full sweep of the knob.
   final double rotation;
+
+  /// Whether to show value labels around the knob.
   final bool showLabels;
 
+  /// Creates a [FlutterKnobPainter] to render the knob widget.
   FlutterKnobPainter({
     required this.value,
     required this.minValue,
@@ -32,29 +56,38 @@ class FlutterKnobPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
 
+    // Paint for the outer ring of the knob.
     final Paint outerRingPaint = Paint()
-      ..shader = outerRingGradient.createShader(Rect.fromCircle(center: center, radius: radius))
+      ..shader = outerRingGradient
+          .createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.fill;
 
+    // Paint for the inner knob circle.
     final Paint innerKnobPaint = Paint()
-      ..shader = innerKnobGradient.createShader(Rect.fromCircle(center: center, radius: radius * 0.7))
+      ..shader = innerKnobGradient
+          .createShader(Rect.fromCircle(center: center, radius: radius * 0.7))
       ..style = PaintingStyle.fill;
 
+    // Paint for the marker line indicating the current value.
     final Paint markerPaint = Paint()
       ..color = markerColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
-    // Draw outer ring
+    // Draw the outer ring.
     canvas.drawCircle(center, radius, outerRingPaint);
 
-    // Draw inner knob
+    // Draw the inner knob.
     canvas.drawCircle(center, radius * 0.7, innerKnobPaint);
 
-    // Calculate the angle from value
+    // Clamp the value to stay within min and max bounds.
     final clamped = value.clamp(minValue, maxValue);
-    final double angle = startAngle + (clamped / rotation) * (endAngle - startAngle);
 
+    // Calculate angle corresponding to the current value.
+    final double angle =
+        startAngle + (clamped / rotation) * (endAngle - startAngle);
+
+    // Compute start and end points of the marker line.
     final Offset markerStart = Offset(
       center.dx + cos(angle) * radius * 0.6,
       center.dy + sin(angle) * radius * 0.6,
@@ -64,8 +97,10 @@ class FlutterKnobPainter extends CustomPainter {
       center.dy + sin(angle) * radius * 0.7,
     );
 
+    // Draw the marker line.
     canvas.drawLine(markerStart, markerEnd, markerPaint);
 
+    // Draw numerical labels if enabled.
     if (showLabels) {
       const labelStyle = TextStyle(
         fontSize: 10,
@@ -73,10 +108,13 @@ class FlutterKnobPainter extends CustomPainter {
         fontWeight: FontWeight.w400,
       );
       const labelCount = 12;
+
+      // Draw 12 evenly spaced labels around the knob.
       for (int i = 0; i <= labelCount; i++) {
         final double t = i / labelCount;
         final labelAngle = startAngle + t * (endAngle - startAngle);
         final labelValue = (t * rotation).round();
+
         final dx = center.dx + cos(labelAngle) * radius * 0.85;
         final dy = center.dy + sin(labelAngle) * radius * 0.85;
 
@@ -85,11 +123,16 @@ class FlutterKnobPainter extends CustomPainter {
           textDirection: TextDirection.ltr,
         );
         tp.layout();
+
+        // Center each label around its position.
         tp.paint(canvas, Offset(dx - tp.width / 2, dy - tp.height / 2));
       }
     }
   }
 
+  /// Determines whether the knob should be repainted.
+  ///
+  /// Repaints only if relevant visual or value properties change.
   @override
   bool shouldRepaint(covariant FlutterKnobPainter oldDelegate) {
     return value != oldDelegate.value ||
