@@ -10,10 +10,11 @@ A customizable rotary knob that can be used for various controls, such as adjust
 The `FlutterOKnob` widget provides a customizable rotary knob that can be used for various controls, such as adjusting volume, brightness, or any other value within a specified range. This widget is interactive, supports various styling options, and provides smooth performance, making it suitable for a variety of applications.
 
 
-<img width="330" alt="Andoid Screenshot" src="https://github.com/user-attachments/assets/4b51f837-0d98-444f-b27b-346ceeb1501c">
 <img width="330" alt="Screenshot 2024-12-06 at 16 22 09" src="https://github.com/user-attachments/assets/2345dd47-979b-42c1-8a43-ced40d0d32f7">
 <img width="330" alt="Screenshot 2024-12-06 at 16 21 57" src="https://github.com/user-attachments/assets/d73f3e32-da00-489d-bf38-d94685094537">
 <img width="330" alt="Screenshot 2024-12-06 at 16 10 31" src="https://github.com/user-attachments/assets/711e0fd5-8bde-4995-b822-d01a40be0f7b">
+<img width="330" alt="Andoid Screenshot" src="https://github.com/user-attachments/assets/4b51f837-0d98-444f-b27b-346ceeb1501c">
+
 
 ## Features:
 - **Interactive Control**: Allows users to drag and adjust values in a specified range.
