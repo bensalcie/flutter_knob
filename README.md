@@ -1,181 +1,159 @@
+
 # FlutterOKnob Widget Documentation
 
 ## Overview:
-  Description: |
-    The FlutterKnob widget provides a customizable rotary knob that can be used for various controls, such as adjusting volume, brightness, or any other value within a specified range. This widget is interactive, supports various styling options, and provides smooth performance, making it suitable for a variety of applications.
+**Description:**
+
+The `FlutterOKnob` widget provides a customizable rotary knob that can be used for various controls, such as adjusting volume, brightness, or any other value within a specified range. This widget is interactive, supports various styling options, and provides smooth performance, making it suitable for a variety of applications.
 
 <img width="330" alt="Screenshot 2024-12-06 at 16 22 09" src="https://github.com/user-attachments/assets/2345dd47-979b-42c1-8a43-ced40d0d32f7">
 <img width="330" alt="Screenshot 2024-12-06 at 16 21 57" src="https://github.com/user-attachments/assets/d73f3e32-da00-489d-bf38-d94685094537">
 <img width="330" alt="Screenshot 2024-12-06 at 16 10 31" src="https://github.com/user-attachments/assets/711e0fd5-8bde-4995-b822-d01a40be0f7b">
 
-    
-
 ## Features:
-  - Interactive Control: Allows users to drag and adjust values in a specified range.
-  - Customizable Appearance: Support for size, color, gradients, sensitivity, and more.
-  - Value Tracking: Emits changes through the `onChanged` callback for external handling.
-  - Optional Label: Allows display of a custom label beneath the knob for added context.
-  - Smooth Performance: Optimized for smooth interaction and visual updates.
+- **Interactive Control**: Allows users to drag and adjust values in a specified range.
+- **Customizable Appearance**: Support for size, color, gradients, sensitivity, and more.
+- **Value Tracking**: Emits changes through the `onChanged` callback for external handling.
+- **Optional Label**: Allows display of a custom label beneath the knob for added context.
+- **Smooth Performance**: Optimized for smooth interaction and visual updates.
 
 ## Dependencies:
-  - Flutter SDK (ensure that your project is configured to use Flutter 3.0 or above).
+- Flutter SDK (ensure that your project is configured to use Flutter 3.0 or above).
 
 ## Installation:
-  steps:
-    - Add the FlutterKnob widget to your Flutter project dependencies in your `pubspec.yaml` file.
-    - Import the widget into your Dart file using the following import statement:
+**Steps:**
 
-     
-      import 'import 'package:flutter_knob/flutter_oldschool_knob.dart';
+- Add the FlutterOKnob widget to your Flutter project dependencies in your `pubspec.yaml` file.
+- Import the widget into your Dart file using:
 
+```dart
+import 'package:flutter_knob/flutter_oldschool_knob.dart';
+```
 
-      dependencies:
-        flutter_oknob: ^0.0.3
-     
+```yaml
+dependencies:
+  flutter_oknob: ^0.0.3
+```
 
 ## Usage Example:
-  Description: |
-    Here is an example of how to use the `FlutterOKnob` widget in your Flutter application. 
-    The widget supports customizable properties such as size, gradients, marker color, sensitivity, and a custom label.
+**Description:**
 
-  Example: 
-  
-    
-        FlutterOKnob(
-          value: 50.0,
-          onChanged: (newValue) {
-            print('Knob value changed: $newValue');
-          },
-          size: 200.0,
-          minValue: 0.0,
-          maxValue: 100.0,
-          outerRingGradient: LinearGradient(
-            colors: [Colors.blue, Colors.purple],
-          ),
-          innerKnobGradient: LinearGradient(
-            colors: [Colors.orange, Colors.red],
-          ),
-          markerColor: Colors.green,
-          knobLabel: Text(
-            'Volume',
-            style: TextStyle(color: Colors.white, fontSize: 18.0),
-          ),
-        );
-   
+Here is an example of how to use the `FlutterOKnob` widget in your Flutter application. The widget supports customizable properties such as size, gradients, marker color, sensitivity, and a custom label.
+
+```dart
+FlutterOKnob(
+  value: 50.0,
+  onChanged: (newValue) {
+    print('Knob value changed: $newValue');
+  },
+  size: 200.0,
+  minValue: 0.0,
+  maxValue: 100.0,
+  outerRingGradient: LinearGradient(
+    colors: [Colors.blue, Colors.purple],
+  ),
+  innerKnobGradient: LinearGradient(
+    colors: [Colors.orange, Colors.red],
+  ),
+  markerColor: Colors.green,
+  knobLabel: Text(
+    'Volume',
+    style: TextStyle(color: Colors.white, fontSize: 18.0),
+  ),
+);
+```
 
 ## Parameters:
-  Description: |
-    The following table outlines the customizable parameters that control the behavior and appearance of the `FlutterOKnob` widget. Each parameter has a default value, but all can be modified to fit the needs of your specific implementation.
+**Description:**
 
-  parameters:
-     
-     value:
-        type: double
-        description: |
-          The current value of the knob, which should be between the `minValue` and `maxValue`. It is required for the widget to work properly.
-        required: true
-      onChanged:
-        type: ValueChanged<double>
-        description: |
-          A callback function that is triggered when the knob's value changes. It passes the new value as an argument.
-        required: true
-      size:
-        type: double
-        default: 150.0
-        description: |
-          The diameter of the knob (in pixels). This determines the size of the knob on the screen.
-      minValue:
-        type: double
-        default: 0.0
-        description: |
-          The minimum possible value that the knob can be set to.
-      maxValue:
-        type: double
-        default: 100.0
-        description: |
-          The maximum possible value that the knob can be set to.
-      markerColor:
-        type: Color
-        default: Colors.greenAccent
-        description: |
-          The color of the marker that indicates the current value on the knob.
-      outerRingGradient:
-        type: Gradient
-        default: |
-          LinearGradient(colors: [Colors.black, Colors.grey], begin: Alignment.topLeft, end: Alignment.bottomRight)
-        description: |
-          The gradient applied to the outer ring of the knob.
-      innerKnobGradient:
-        type: Gradient
-        default: |
-          LinearGradient(colors: [Colors.grey, Colors.black], begin: Alignment.topLeft, end: Alignment.bottomRight)
-        description: |
-          The gradient applied to the inner knob.
-      sensitivity:
-        type: double
-        default: 0.5
-        description: |
-          Controls how sensitive the knob is to user input during drag gestures. Higher values make the knob more sensitive.
-      knobLabel:
-        type: Widget
-        default: null
-        description: |
-          An optional widget that can be placed beneath the knob. Typically used to display a label, such as "Volume" or "Brightness."
+The following table outlines the customizable parameters that control the behavior and appearance of the `FlutterOKnob` widget. Each parameter has a default value, but all can be modified to fit the needs of your specific implementation.
+
+| Name              | Type                    | Default                             | Description |
+|-------------------|-------------------------|-------------------------------------|-------------|
+| `value`           | `double`                | —                                   | The current value of the knob. Must be between `minValue` and `maxValue`. |
+| `onChanged`       | `ValueChanged<double>`  | —                                   | Callback triggered on value change. |
+| `size`            | `double`                | `150.0`                              | Diameter of the knob in pixels. |
+| `minValue`        | `double`                | `0.0`                                | Minimum value. |
+| `maxValue`        | `double`                | `100.0`                              | Maximum value. |
+| `markerColor`     | `Color`                 | `Colors.greenAccent`                | Color of the value marker. |
+| `outerRingGradient` | `Gradient`            | `LinearGradient([black, grey])`     | Gradient for the outer ring. |
+| `innerKnobGradient` | `Gradient`            | `LinearGradient([grey, black])`     | Gradient for the inner knob. |
+| `sensitivity`     | `double`                | `0.5`                                | Drag sensitivity. |
+| `knobLabel`       | `Widget?`               | `null`                               | Optional label below the knob. |
 
 ## How It Works:
-  Description: |
-    The `FlutterOKnob` widget works by listening to drag gestures (`onPanUpdate`). When a user drags the knob, the value of the knob changes based on the drag movement. The updated value is clamped between `minValue` and `maxValue`, ensuring it stays within the allowed range. The value change is reflected visually by updating the `ValueNotifier` which triggers the widget to rebuild and display the new value.
+**Description:**
 
-    The widget also uses custom painting (`FlutterKnobPainter`) to render the knob's outer ring, inner knob, and value marker. This allows the widget to provide a smooth, customizable appearance while maintaining high performance.
+The `FlutterOKnob` widget listens to drag gestures (`onPanUpdate`). As the user drags, the value updates based on the direction and speed of the gesture. This value is clamped between `minValue` and `maxValue`, then passed to the `onChanged` callback and rendered visually.
+
+### Rendering with `FlutterKnobPainter`:
+
+The visual representation is powered by `FlutterKnobPainter`, a `CustomPainter` that draws:
+
+- **Outer Ring**: A circle filled with a customizable gradient.
+- **Inner Knob**: A smaller circle, also gradient-filled, inside the ring.
+- **Value Marker**: A line that points to the current value based on angle calculations.
+- **Value Labels**: Optional numerical labels spaced evenly around the knob.
+
+The angle is calculated based on the clamped value and interpolated between `startAngle` and `endAngle`. When `showLabels` is true, labels from 0 to the max `rotation` are drawn around the perimeter using `TextPainter`.
+
+Repaint only occurs when any of the critical visual or state parameters (e.g., value, gradients, min/max, rotation) change — keeping performance optimal.
 
 ## Customization Options:
-  description: |
-    The `FlutterOKnob` widget provides several options to customize its appearance and behavior. These options allow you to tailor the widget to fit your app’s design and functional needs.
+**Description:**
 
-  options:
-    outerRingGradient:
-      description: |
-        You can customize the outer ring's gradient to match your app's theme.
-      example: |
-        outerRingGradient: LinearGradient(
-          colors: [Colors.blue, Colors.cyan],
-        )
-    innerKnobGradient:
-      description: |
-        The inner knob's gradient can also be customized to fit your design.
-      example: |
-        innerKnobGradient: LinearGradient(
-          colors: [Colors.orange, Colors.yellow],
-        )
-    markerColor:
-      description: |
-        Change the color of the marker that indicates the current value on the knob.
-      example: |
-        markerColor: Colors.red
-    sensitivity:
-      description: |
-        Adjust the knob's sensitivity to user gestures.
-      example: |
-        sensitivity: 0.8
-    knobLabel:
-      description: |
-        Add a custom widget as the label below the knob. This could be useful for showing a label like "Volume" or any other text.
-      example: |
-        knobLabel: Text(
-          'Volume',
-          style: TextStyle(color: Colors.white, fontSize: 16),
-        )
+The `FlutterOKnob` widget provides several options to customize its appearance and behavior. These options allow you to tailor the widget to fit your app’s design and functional needs.
+
+### `outerRingGradient`
+Customize the outer ring's gradient:
+
+```dart
+outerRingGradient: LinearGradient(
+  colors: [Colors.blue, Colors.cyan],
+)
+```
+
+### `innerKnobGradient`
+Customize the inner knob’s appearance:
+
+```dart
+innerKnobGradient: LinearGradient(
+  colors: [Colors.orange, Colors.yellow],
+)
+```
+
+### `markerColor`
+Change the color of the marker that indicates the current value:
+
+```dart
+markerColor: Colors.red
+```
+
+### `sensitivity`
+Adjust the sensitivity to user drag gestures:
+
+```dart
+sensitivity: 0.8
+```
+
+### `knobLabel`
+Add a label under the knob:
+
+```dart
+knobLabel: Text(
+  'Volume',
+  style: TextStyle(color: Colors.white, fontSize: 16),
+)
+```
 
 ## Notes:
-  - Ensure that the initial value (`value`) is within the range defined by `minValue` and `maxValue` to avoid unexpected behavior.
-  - For better UI consistency, customize the gradients, sensitivity, and marker color to match the design of your app.
-  - The widget is responsive and adapts to different screen resolutions.
+- Ensure that the initial value (`value`) is within the range defined by `minValue` and `maxValue` to avoid unexpected behavior.
+- For better UI consistency, customize the gradients, sensitivity, and marker color to match your app.
+- The widget adapts well to different screen resolutions.
 
 ## Contribution:
-  description: |
-    If you'd like to contribute or report issues, feel free to open a pull request or an issue on the repository. Contributions such as bug fixes, performance improvements, and feature requests are always welcome.
+If you'd like to contribute or report issues, feel free to open a pull request or an issue on the repository. Contributions such as bug fixes, performance improvements, and feature requests are always welcome.
 
 ## License:
-  license: MIT
-  description: |
-    This project is licensed under the MIT License. See the LICENSE file for details.
+**License:** MIT  
+This project is licensed under the MIT License. See the LICENSE file for details.
