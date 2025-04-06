@@ -34,7 +34,7 @@ import 'package:flutter_knob/flutter_oldschool_knob.dart';
 
 ```yaml
 dependencies:
-  flutter_oknob: ^0.0.3
+  flutter_oknob: ^0.0.5
 ```
 
 ## Usage Example:
