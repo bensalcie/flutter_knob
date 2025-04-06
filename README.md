@@ -42,25 +42,18 @@ Here is an example of how to use the `FlutterOKnob` widget in your Flutter appli
 
 ```dart
 FlutterOKnob(
-  value: 50.0,
-  onChanged: (newValue) {
-    print('Knob value changed: $newValue');
-  },
-  size: 200.0,
-  minValue: 0.0,
-  maxValue: 100.0,
-  outerRingGradient: LinearGradient(
-    colors: [Colors.blue, Colors.purple],
-  ),
-  innerKnobGradient: LinearGradient(
-    colors: [Colors.orange, Colors.red],
-  ),
-  markerColor: Colors.green,
-  knobLabel: Text(
-    'Volume',
-    style: TextStyle(color: Colors.white, fontSize: 18.0),
-  ),
-);
+ size: 200,
+ knobvalue: 125,
+ showKnobLabels: true,
+ maxRotationAngle: 180,
+ sensitivity: 0.6,
+ onChanged: (brighness) {
+   debugPrint(
+  "Flutter Knob Changed Value : ==>  Brightness $brighness");
+ },
+ knobLabel: const AppTextViewMedium(
+ text: 'Brightness (0-100)', textAlign: TextAlign.center),
+ ),
 ```
 
 ## Parameters:
