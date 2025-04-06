@@ -2,6 +2,9 @@
 # FlutterOKnob Widget Documentation
 
 ## Overview:
+
+A customizable rotary knob that can be used for various controls, such as adjusting volume, brightness, or any other value within a specified range
+
 **Description:**
 
 The `FlutterOKnob` widget provides a customizable rotary knob that can be used for various controls, such as adjusting volume, brightness, or any other value within a specified range. This widget is interactive, supports various styling options, and provides smooth performance, making it suitable for a variety of applications.
